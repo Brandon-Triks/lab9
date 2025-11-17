@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 4.0)
+project(lab9)
+
+set(CMAKE_CXX_STANDARD 20)
+
+add_executable(lab9 main.cpp
+        header.h
+        task1.cpp
+        task2.cpp)
