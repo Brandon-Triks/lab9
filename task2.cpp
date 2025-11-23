@@ -46,14 +46,14 @@ Matrix Add(const Matrix& a, const Matrix& b) {
 
 Matrix Sub(const Matrix& a, const Matrix& b) {
     if (a.m_ == b.m_ && a.n_ == b.n_) {
-        Matrix Sum;
-        Construct(Sum,a.n_,a.m_);
+        Matrix Sub;
+        Construct(Sub,a.n_,a.m_);
         for (int i = 0; i < a.m_; i++) {
             for (int j = 0; j < a.n_; j++){
-                Sum.data_[i][j] = a.data_[i][j] - b.data_[i][j];
+                Sub.data_[i][j] = a.data_[i][j] - b.data_[i][j];
             }
         }
-        return Sum;
+        return Sub;
     }
     else {
         Matrix empty;
@@ -62,15 +62,18 @@ Matrix Sub(const Matrix& a, const Matrix& b) {
 }
 
 Matrix Mult(const Matrix& a, const Matrix& b) {
-    if (a.m_ == b.m_ && a.n_ == b.n_) {
-        Matrix Sum;
-        Construct(Sum,a.n_,a.m_);
+    if (a.n_ == b.m_) {
+        Matrix Mult;
+        Construct(Mult,a.n_,b.m_);
         for (int i = 0; i < a.m_; i++) {
-            for (int j = 0; j < a.n_; j++){
-                Sum.data_[i][j] = a.data_[i][j] * b.data_[i][j];
+            for (int j = 0; j < b.n_; j++) {
+                Mult.data_[i][j] = 0;
+                for (int k = 0; k < a.n_; k++) {
+                    Mult.data_[i][j] += a.data_[i][k] * b.data_[k][j];
+                }
             }
         }
-        return Sum;
+        return Mult;
     }
     else {
         Matrix empty;
